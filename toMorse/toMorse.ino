@@ -8,6 +8,7 @@ const int dot_en_ms = 500;
 //space > dura 5 dots
 //espacio entre letras > dura 3 dots
 //espacio en la letra > dura 1 dot
+//espacio entre palabras > 
 void dot() {
   digitalWrite(ledPIN , HIGH); //encendemos el led
   delay(dot_en_ms); //cada punto dura un dot
@@ -352,10 +353,14 @@ void stringToMorse(char letra){
     case 'z':
       z();
       break;
+    case ' ':
+      space();
+      break;
   }  
 }
 
-String input = "hello world";
+String input = "polo music"; //string a convertir a codigo morse
+int length = input.length(); // hacemos una variable con el length del string
 
 void setup() {
   Serial.begin(9600); // inciar puerto serie
@@ -363,5 +368,8 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  //iteramos sobre cada uno de los caracteres del string
+  for(int i = 0; i < length; i++){
+      stringToMorse(input[i]);
+    }
 }
